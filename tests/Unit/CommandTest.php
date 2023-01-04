@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Unit;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -15,9 +15,9 @@ class CommandTest extends TestCase
      */
     public function test_example()
     {
-        $this->artisan('question')->expectsQuestion('What is your name?', 'Taylor Otwell')
+        $this->artisan('question')->expectsQuestion('What is your name?', 'Nguyen Huu Tuan')
             ->expectsQuestion('Which language do you prefer?', 'PHP')
-            ->expectsOutput('Your name is Taylor Otwell and you prefer PHP.')
+            ->expectsOutput('Your name is Nguyen Huu Tuan and you prefer PHP.')
             ->assertExitCode(0);
     }
 }

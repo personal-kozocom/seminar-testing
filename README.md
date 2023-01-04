@@ -21,3 +21,11 @@
 - `docker exec -it php php artisan key:generate`
 - `docker exec -it php php artisan migrate`
 - Run http://localhost:9000
+
+
+
+# Browser Test
+- composer require --dev laravel/dusk
+- php artisan dusk:install
+- php artisan ser
+- npm run dev
