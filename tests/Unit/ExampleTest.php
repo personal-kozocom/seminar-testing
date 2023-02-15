@@ -6,26 +6,31 @@ use PHPUnit\Framework\TestCase;
 
 class ExampleTest extends TestCase
 {
-    public function test_1()
+    public function setUp(): void {
+        require_once 'app/Helpers/ArrayHelper.php';
+        parent::setUp();
+    }
+    
+    /**
+     * @test
+     * @dataProvider provideData
+     */
+    public function testVoidFunction($array)
     {
+        // Call the void function
+        removeLastItem($array);
         $this->assertTrue(true);
-        $this->assertEmpty(null);
     }
 
-    public function test_2()
+    public function provideData()
     {
-        $this->assertTrue(true);
-    }
-
-    public function Test_3()
-    {
-        $this->assertEmpty(null);
-        $this->assertTrue(true);
-    }
-
-    protected function test_4()
-    {
-        $this->assertFalse(false);
-        $this->assertTrue(true);
+        return [
+            [
+                'array' => [1, 2, 3]
+            ],
+            [
+                'array' => [3, 2, 3]
+            ],
+        ];
     }
 }

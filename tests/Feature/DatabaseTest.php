@@ -11,7 +11,7 @@ use Tests\TestCase;
 
 class DatabaseTest extends TestCase
 {
-    use DatabaseTransactions;
+    // use DatabaseTransactions;
     // use RefreshDatabase;
 
     public function testCountDB()

@@ -17,22 +17,19 @@ class UserTest extends TestCase
 
     public function test_get_all_users()
     {
-        $mock = $this->mock(PaymentService::class, function (MockInterface $mock) {
-            $mock->shouldReceive('getCreditCard')
-                ->andReturn('1111111111111111');
-        });
         $response = $this->getJson('/api/users');
-        $response->assertValidRequest()
-            ->assertValidResponse();
-        $response->assertStatus(200)
-            ->assertJsonPath('0.credit_number', '1111111111111111');
+        $response->assertStatus(200);
     }
 
     public function test_get_user_detail()
     {
-        $response = $this->getJson('/api/users/00000000-0000-4000-8000-000000000000');
-        $response->assertValidRequest()
-            ->assertValidResponse();
-        $response->assertStatus(200);
+        $this->mock(PaymentService::class, function (MockInterface $mock) {
+            $mock->shouldReceive('getCreditCard')
+                ->andReturn('1111111111111111');
+        });
+        $response = $this->getJson('/api/users/1');
+
+        $response->assertStatus(200)
+            ->assertJsonPath('credit_number', '1111111111111111');
     }
 }

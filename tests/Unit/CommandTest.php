@@ -15,9 +15,10 @@ class CommandTest extends TestCase
      */
     public function test_example()
     {
-        $this->artisan('question')->expectsQuestion('What is your name?', 'Nguyen Huu Tuan')
+        $this->artisan('question')
+            ->expectsQuestion('What is your name?', 'Nguyen Huu Tuan')
             ->expectsQuestion('Which language do you prefer?', 'PHP')
             ->expectsOutput('Your name is Nguyen Huu Tuan and you prefer PHP.')
-            ->assertExitCode(0);
+            ->assertSuccessful();
     }
 }

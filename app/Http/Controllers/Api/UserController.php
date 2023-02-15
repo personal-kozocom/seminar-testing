@@ -17,13 +17,11 @@ class UserController extends Controller
 
     public function index()
     {
-        $creditNumber = $this->paymentService->getCreditCard();
         return response()->json([
             [
-                'id' => '00000000-0000-4000-8000-000000000000',
+                'id' => '1',
                 'name' => 'Nguyen Huu Tuan',
                 'email' => 'tuannh@kozo-japan.com',
-                'credit_number' => $creditNumber
             ]
         ]);
     }
@@ -32,7 +30,7 @@ class UserController extends Controller
     {
         $creditNumber = $this->paymentService->getCreditCard();
         return response()->json([
-            'id' => '00000000-0000-4000-8000-000000000000',
+            'id' => '1',
             'name' => 'Nguyen Huu Tuan',
             'email' => 'tuannh@kozo-japan.com',
             'credit_number' => $creditNumber
