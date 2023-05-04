@@ -22,7 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('users', function () {
     return response()->json([
         [
-            'id' => '1',
+            'id' => 'bff64842-ea1c-11ed-a05b-0242ac120003',
             'name' => 'Nguyen Huu Tuan',
             'email' => 'tuannh@kozo-japan.com',
         ]

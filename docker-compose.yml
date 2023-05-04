@@ -33,15 +33,16 @@ services:
     ports:
       - "3307:3306"
     volumes:
-      - dbdata:/var/lib/mysql
-    env_file:
-      - .docker.env
+      - ./.docker/db/data:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
     networks: 
       - app-network
 
-volumes:
-  dbdata:
-    driver: local
+# volumes:
+#   dbdata:
+#     driver: local
 
 networks:
   app-network:
