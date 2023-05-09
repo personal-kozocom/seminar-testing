@@ -2,8 +2,6 @@
 
 namespace Tests\Feature\Api;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Spectator\Spectator;
 use Tests\TestCase;
 
@@ -12,7 +10,6 @@ class UserTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        Spectator::using('api-specs.yml');
     }
     /**
      * A basic feature test example.
@@ -21,7 +18,10 @@ class UserTest extends TestCase
      */
     public function test_example()
     {
+        $this->withoutExceptionHandling();
+        Spectator::using('api-specs.yml');
         $response = $this->get('/api/users');
+
         $response->assertValidRequest()
             ->assertValidResponse();
         $response->assertStatus(200);
