@@ -40,6 +40,12 @@ jobs:
           export SPEC_GITHUB_TOKEN=$(echo $SPEC_GITHUB_TOKEN)
           php artisan test
 
+      - name: test after phpunit
+        shell: bash
+        run: |
+          docker-compose up -d app
+          docker-compose exec -T app composer install
+
   slack-notify:
     if: always()
     needs: [ build ]
