@@ -26,23 +26,31 @@ jobs:
       - name: database migration
         uses: nick-invision/retry@v2
         with:
-          retry_wait_seconds: 10  
+          retry_wait_seconds: 10
           max_attempts: 3
           timeout_minutes: 1
           shell: bash
           command: docker-compose exec -T app php artisan migrate:fresh --seed
-      
+
       - name: phpunit
         env:
           SPEC_GITHUB_TOKEN: ${{ secrets.SPEC_GITHUB_TOKEN }}
+        run: docker-compose exec -e SPEC_GITHUB_TOKEN=$(echo $SPEC_GITHUB_TOKEN) -T app composer test
+
+      - name: test after phpunit
+        shell: bash
         run: |
-          docker-compose exec -it app bash
-          export SPEC_GITHUB_TOKEN=$(echo $SPEC_GITHUB_TOKEN)
-          php artisan test
+          docker-compose up -d app
+          docker-compose exec -T app composer install
+
+      - name: test coverage
+        env:
+          SPEC_GITHUB_TOKEN: ${{ secrets.SPEC_GITHUB_TOKEN }}
+        run: docker-compose exec -e SPEC_GITHUB_TOKEN=$(echo $SPEC_GITHUB_TOKEN) -T app composer test:coverage
 
   slack-notify:
     if: always()
-    needs: [ build ]
+    needs: [build]
     name: workflow notification to slack
     runs-on: ubuntu-latest
     steps:
